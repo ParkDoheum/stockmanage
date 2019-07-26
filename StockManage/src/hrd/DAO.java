@@ -205,6 +205,24 @@ public class DAO {
 				close(con, ps, null);
 			}
 	    }
+	    
+	    public static void productDel(int p_no) {
+	    	Connection con = null;
+	    	PreparedStatement ps = null;	 
+	    	
+	    	String sql = " delete from t_product where p_no = ? ";
+	    	
+	    	try {
+				con = getCon();
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, p_no);
+				ps.execute();				
+			} catch (Exception e) {			
+				e.printStackTrace();
+			} finally {
+				close(con, ps, null);
+			}
+	    }
 }
 
 

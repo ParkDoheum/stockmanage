@@ -26,13 +26,22 @@
 		<td>
 			<a href="productRegMod?p_no=<%=vo.getP_no()%>"><button>정정</button></a>
 			<a href="productIm?p_no=<%=vo.getP_no()%>"><button>입고</button></a>
-			<button>삭제</button>
+			<button onclick="delConfirm(<%=vo.getP_no()%>)">삭제</button>
 		</td>
 	</tr>
 	<% } %>
 </table>
 
 <a href="productRegMod"><button>신규상품추가</button></a>
+<script>
+	function delConfirm(p_no) {
+		if(confirm('정말로 해당 상품을 삭제합니까?')){
+				location.href = 'productDel?p_no=' + p_no;
+		} 
+	}
+</script>
+
+
 
 
 
