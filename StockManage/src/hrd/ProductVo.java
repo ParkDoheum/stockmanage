@@ -2,8 +2,28 @@ package hrd;
 
 public class ProductVo {
 	private int p_no, p_cnt_sum, p_cnt_rem, p_price, i_cnt;
-	private String p_name;
+	private int i_no, typ;
+	private String p_name, i_date;
 		
+
+	public int getI_no() {
+		return i_no;
+	}
+	public void setI_no(int i_no) {
+		this.i_no = i_no;
+	}
+	public String getI_date() {
+		return i_date;
+	}
+	public void setI_date(String i_date) {
+		this.i_date = i_date;
+	}
+	public int getTyp() {
+		return typ;
+	}
+	public void setTyp(int typ) {
+		this.typ = typ;
+	}
 	public int getI_cnt() {
 		return i_cnt;
 	}

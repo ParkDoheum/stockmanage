@@ -223,6 +223,52 @@ public class DAO {
 				close(con, ps, null);
 			}
 	    }
+	    
+	    public static List<ProductVo> selectSaleManageList() {
+	    	List<ProductVo> list = new ArrayList();	    	
+	    	
+	    	Connection con = null;
+	    	PreparedStatement ps = null;
+	    	ResultSet rs = null;
+	    	
+	    	String sql = " SELECT "
+	    			+ " a.i_date, 1 as typ, a.i_no, a.p_no, a.i_cnt "
+	    			+ " , b.p_name, ((a.i_cnt * b.p_price) * 0.8) as p_price "
+	    			+ " FROM t_import A "
+	    			+ " INNER JOIN t_product B "
+	    			+ " ON A.p_no = b.p_no"
+	    			+ " UNION ALL"
+	    			+ " SELECT"
+	    			+ " A.s_date, 2, A.s_no, A.p_no, A.s_q"
+	    			+ " , b.p_name, (A.s_q * B.p_price)"
+	    			+ " FROM t_sell A"
+	    			+ " INNER JOIN t_product B"
+	    			+ " ON A.p_no = B.p_no";
+	    	
+	    	try {
+				con = getCon();
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+				while(rs.next()) {
+					ProductVo vo = new ProductVo();
+					vo.setI_date(rs.getString("i_date"));
+					vo.setTyp(rs.getInt("typ"));
+					vo.setI_no(rs.getInt("i_no"));
+					vo.setP_no(rs.getInt("p_no"));
+					vo.setI_cnt(rs.getInt("i_cnt"));
+					vo.setP_name(rs.getString("p_name"));
+					vo.setP_price(rs.getInt("p_price"));
+					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				close(con, ps, rs);
+			}
+			
+	    			
+	    	return list;
+	    }
 }
 
 
